@@ -1,3 +1,4 @@
+package Courier;
 import java.util.*;
 
 public class ACMECourierCompany {
@@ -57,6 +58,7 @@ public class ACMECourierCompany {
 	
 	public void addCustomer(Customer customer) {
 		if (customer != null) {
+			//System.out.println(""+getNumber());
 			getCustomers().put(customer.getNumber(), customer);
 		}
 	}

@@ -1,3 +1,4 @@
+package Courier;
 public class Customer {
 	
 	ACMECourierCompany company;
@@ -17,6 +18,10 @@ public class Customer {
 	 * it is defined as the email of the customer.
 	 */
 	private String email;
+	
+	public Customer(){
+		
+	}
 	
 	public Customer(String name,String address, String number,String email){
 		this.setName(name);
