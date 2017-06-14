@@ -8,10 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Courier.ACMECourierCompany;
-import Courier.Customer;
 import CourierUI.CustomerListPanel;
-
+import courierPD.ACMECourierCompany;
+import courierPD.Customer;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -35,6 +34,16 @@ public class HomeFrame extends JFrame {
 					//pass the instance of Store to JFrame
 					HomeFrame frame = new HomeFrame(company);
 					frame.setVisible(true);
+					  frame.setSize(600,600);
+					
+				        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				        frame.setTitle("ACME COURIER SERVICES LOGIN");
+				        
+				        frame.getContentPane().setLayout(new BorderLayout());
+
+				        //frame.setContentPane(new Paneel());
+				        frame.pack();  
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,11 +58,11 @@ public class HomeFrame extends JFrame {
 	 */
 	public HomeFrame(ACMECourierCompany company) {
 		
-		JFrame currentFrame=this;
-		
+		currentFrame=this;
+		System.out.println("in frame home frame");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 767, 506);
+		setBounds(100, 100, 767, 383);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -77,7 +86,16 @@ public class HomeFrame extends JFrame {
 		JMenu mnDriverDetails = new JMenu("Driver Details");
 		menuBar.add(mnDriverDetails);
 		
-		JMenuItem mntmDriversList = new JMenuItem("Drivers List");
+		JMenuItem mntmDriversList = new JMenuItem("Driv List");
+		mntmDriversList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DriverListPanel dlp=new DriverListPanel(currentFrame,company);
+				currentFrame.getContentPane().removeAll();
+				currentFrame.getContentPane().add(dlp);
+				currentFrame.getContentPane().revalidate();
+				//dlp.setVisible(true);
+			}
+		});
 		mnDriverDetails.add(mntmDriversList);
 		
 		JMenuItem mntmDriversAvailability = new JMenuItem("Driver's Availability");
@@ -89,20 +107,20 @@ public class HomeFrame extends JFrame {
 		JMenuItem mntmCustomerList = new JMenuItem("Customer List");
 		mntmCustomerList.addActionListener(new ActionListener() {
 			
-			CustomerListPanel customerlist = new CustomerListPanel(currentFrame, company);
+			//CustomerListPanel customerlist = ;
 			public void actionPerformed(ActionEvent arg0) {
 				
-				currentFrame.setContentPane(customerlist);
-				customerlist.setBorder(new EmptyBorder(5,5,5,5));
-				customerlist.setLayout(new BorderLayout(0,0));
-				currentFrame.pack();
-				currentFrame.setLocationRelativeTo(null);
-				currentFrame.setVisible(true);
+//				currentFrame.setContentPane(customerlist);
+//				customerlist.setBorder(new EmptyBorder(5,5,5,5));
+//				customerlist.setLayout(new BorderLayout(0,0));
+//				currentFrame.pack();
+//				currentFrame.setLocationRelativeTo(null);
+//				currentFrame.setVisible(true);
 				
-				/*
-				currentFrame.getContentPane().removeAll();
-				currentFrame.getContentPane().add(customerlist);
-				currentFrame.getContentPane().validate();*/
+				
+				getContentPane().removeAll();
+				getContentPane().add(new CustomerListPanel(currentFrame, company));
+				getContentPane().revalidate();
 				
 			}
 		});
@@ -118,11 +136,12 @@ public class HomeFrame extends JFrame {
 		
 		JMenu mnLogout = new JMenu("Logout");
 		menuBar.add(mnLogout);
-		getContentPane().setLayout(null);
+		//getContentPane().setLayout(null);
 		
 		JLabel lblWelcomeToAcme = new JLabel("Welcome to ACME Courier Service");
 		lblWelcomeToAcme.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblWelcomeToAcme.setBounds(231, 103, 303, 141);
-		getContentPane().add(lblWelcomeToAcme);
+		getContentPane().add(lblWelcomeToAcme, BorderLayout.CENTER);
+		//currentFrame.pack();
 	}
 }

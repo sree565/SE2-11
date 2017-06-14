@@ -6,15 +6,14 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import courierPD.ACMECourierCompany;
+import courierPD.Customer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import Courier.Customer;
-import Courier.ACMECourierCompany; 
+import java.awt.event.ActionEvent; 
 
 public class CustomerEditPanel extends JPanel
 {
@@ -28,6 +27,7 @@ public class CustomerEditPanel extends JPanel
 	 */
 	public CustomerEditPanel(JFrame currentFrame, Customer customer,ACMECourierCompany company) {
 		setLayout(null);
+		System.out.println("hello na");
 		
 		JLabel lblCustomerEdit = new JLabel("Customer Edit");
 		lblCustomerEdit.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -54,22 +54,22 @@ public class CustomerEditPanel extends JPanel
 		lblLocation.setBounds(85, 236, 56, 16);
 		add(lblLocation);
 		
-		txtCustomerno = new JTextField();
+		txtCustomerno = new JTextField(customer.getNumber());
 		txtCustomerno.setBounds(215, 105, 116, 22);
 		add(txtCustomerno);
 		txtCustomerno.setColumns(10);
 		
-		txtName = new JTextField();
+		txtName = new JTextField(customer.getName());
 		txtName.setBounds(215, 147, 116, 22);
 		add(txtName);
 		txtName.setColumns(10);
 		
-		textEmailID = new JTextField();
+		textEmailID = new JTextField(customer.getEmail());
 		textEmailID.setBounds(215, 189, 116, 22);
 		add(textEmailID);
 		textEmailID.setColumns(10);
 		
-		textLocation = new JTextField();
+		textLocation = new JTextField(customer.getAddress());
 		textLocation.setBounds(215, 233, 116, 22);
 		add(textLocation);
 		textLocation.setColumns(10);
@@ -78,13 +78,17 @@ public class CustomerEditPanel extends JPanel
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				customer.setNumber(txtCustomerno.getText());
-		        company.addCustomer(customer);
+		        
 		        
 		        //On Save- get values from the text fields and save
 		        customer.setName(txtName.getText());
 		        customer.setAddress(textLocation.getText());
 		        customer.setEmail(textEmailID.getText());
-		        	      
+		        company.addCustomer(customer);
+		        
+		        currentFrame.getContentPane().removeAll();
+		        currentFrame.getContentPane().add(new CustomerListPanel(currentFrame,company));
+		        currentFrame.getContentPane().revalidate();	      
 			}
 		});
 		btnSave.setBounds(117, 303, 97, 25);
@@ -96,7 +100,7 @@ public class CustomerEditPanel extends JPanel
 				CustomerListPanel customerListPanel = new CustomerListPanel(currentFrame,company);
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(customerListPanel);
-				currentFrame.revalidate();
+				currentFrame.getContentPane().revalidate();
 			}
 		});
 		btnCancel.setBounds(267, 303, 97, 25);

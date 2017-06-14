@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Courier.ACMECourierCompany;
+import courierPD.ACMECourierCompany;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,6 +35,12 @@ public class LoginFrame extends JFrame {
 				try {
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
+					 frame.setSize(600,600);
+						
+				        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				        frame.getContentPane().setLayout(new BorderLayout());
+				        //frame.pack();  
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,7 +53,7 @@ public class LoginFrame extends JFrame {
 	 */
 	public LoginFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 583, 492);
+		setBounds(100, 100, 382, 287);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,14 +82,17 @@ public class LoginFrame extends JFrame {
 				 
 				 if (uname.equals("admin")&& pwd.equals("123")){
 					 JOptionPane.showMessageDialog(frame, "Logged in successfully");
+					 //frame.setVisible(false);
+					 ACMECourierCompany company = new ACMECourierCompany();
+					 HomeFrame home = new HomeFrame(company);
+					 home.setVisible(true);
+					 
 				 }
 				 else
 				 JOptionPane.showMessageDialog(frame,"Invalid credentials");
 				 
 				 //Navigate to Home page
-				 ACMECourierCompany company = new ACMECourierCompany();
-				 HomeFrame home = new HomeFrame(company);
-				 home.setVisible(true);
+				 
 			}
 		});
 		btnLogin.setBounds(196, 225, 97, 25);
