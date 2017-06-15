@@ -56,7 +56,7 @@ public Statement st;
 			}
 		});
 	
-		list.setBounds(47, 69, 397, 214);
+		list.setBounds(47, 91, 359, 192);
      	add(list);
 		
 		JButton btnAdd = new JButton("Add");
@@ -68,7 +68,7 @@ public Statement st;
 			     currentFrame.getContentPane().revalidate();
 			}
 		});
-		btnAdd.setBounds(77, 325, 97, 25);
+		btnAdd.setBounds(31, 325, 97, 25);
 		add(btnAdd);
 		
 		 btnEdit = new JButton("Edit");
@@ -81,7 +81,7 @@ public Statement st;
 				currentFrame.revalidate();
 			}
 		});
-		btnEdit.setBounds(412, 325, 97, 25);
+		btnEdit.setBounds(166, 325, 97, 25);
 		add(btnEdit);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -91,7 +91,7 @@ public Statement st;
 				dList.removeElement(list.getSelectedValue());
 			}
 		});
-		btnDelete.setBounds(235, 325, 97, 25);
+		btnDelete.setBounds(291, 325, 97, 25);
 		add(btnDelete);
 
 	}
