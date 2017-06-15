@@ -13,7 +13,7 @@ public class Driver {
 	/**
 	 * it is defines the number of the driver.
 	 */
-	private String number;
+	private int number;
 	
 	public ACMECourierCompany getCompany() {
 		return Company;
@@ -39,11 +39,11 @@ public class Driver {
 		this.name = name;
 	}
 
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 

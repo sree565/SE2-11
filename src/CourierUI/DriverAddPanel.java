@@ -5,11 +5,20 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import java.sql.PreparedStatement;
+
+import java.util.ArrayList;
+
 import courierPD.ACMECourierCompany;
 import courierPD.Driver;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class DriverAddPanel extends JPanel {
@@ -51,7 +60,8 @@ public class DriverAddPanel extends JPanel {
 		add(lblEmailId);
 		
 		txtCid = new JTextField();
-		txtCid.setText(driver.getNumber());
+		String k=Integer.toString(driver.getNumber());
+		txtCid.setText(k);
 		txtCid.setBounds(192, 93, 130, 26);
 		add(txtCid);
 		txtCid.setColumns(10);
@@ -83,18 +93,30 @@ public class DriverAddPanel extends JPanel {
 		JButton btnSave = new JButton("Hire");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((txtCid.getText()).equals(c.getDrivers().get(txtCid.getText())))
-				{
-					c.removeDriver(driver);
-				}
-					driver.setNumber(txtCid.getText());
+				Connection con;
+				Statement stem;
+				//drivers.clear();
+				try{
+					con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+					PreparedStatement ps = con.prepareStatement("insert into driver(driver_no, d_name, d_email, d_phone) values(?,?,?,?)");
+		            ps.setString(1, txtCid.getText());
+		            ps.setString(2, txtFname.getText()+txtLname.getText());
+		            ps.setString(3, txtEmail.getText());
+		            ps.setString(4, txtPno.getText());
+		            ps.executeUpdate();
+				int k=Integer.parseInt(txtCid.getText());
+					driver.setNumber(k);
 					driver.setName(txtFname.getText()+txtLname.getText());
 					driver.setPhone(txtPno.getText());
+					driver.setEmail(txtEmail.getText());
 					c.addDriver(driver);
 					currentFrame.getContentPane().removeAll();
 					currentFrame.getContentPane().add(new DriverListPanel(currentFrame,c));
 					currentFrame.getContentPane().revalidate();
+				}
+				catch(SQLException ex){
 					
+				}
 			}
 		});
 		btnSave.setBounds(72, 305, 117, 29);
@@ -103,9 +125,14 @@ public class DriverAddPanel extends JPanel {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
 			currentFrame.getContentPane().removeAll();
 			currentFrame.getContentPane().add(new DriverListPanel(currentFrame,c));
 			currentFrame.getContentPane().revalidate();
+				}
+				catch(SQLException ex){
+					
+				}
 			}
 		});
 		btnCancel.setBounds(229, 305, 117, 29);

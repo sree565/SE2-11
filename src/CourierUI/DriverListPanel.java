@@ -8,6 +8,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,18 +23,18 @@ import courierPD.Driver;
 
 import javax.swing.event.ListSelectionEvent;
 
-public class DriverListPanel extends JPanel {
+public class DriverListPanel extends JPanel{
 
 	/**
 	 * Create the panel.
 	 */
 	private JList list ;
 	private DefaultListModel listModel;
-	public DriverListPanel(JFrame currentFrame,ACMECourierCompany c) {
+	public DriverListPanel(JFrame currentFrame,ACMECourierCompany c) throws SQLException{
 		setLayout(null);
 		listModel = new DefaultListModel();
-		for(Entry<String,Driver> driverEntry : c.getDrivers().entrySet())
-			listModel.addElement(driverEntry.getValue());
+		for(Driver d:c.getDrivers())
+			listModel.addElement(d);
 		
 		//list = new JList(listModel);
 		
@@ -66,10 +72,25 @@ public class DriverListPanel extends JPanel {
 		add(btnAdd);
 		
 		JButton btnDelete = new JButton("Fire");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.removeDriver((Driver)list.getSelectedValue());
+		btnDelete.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Connection con;
+				Statement stem;
+				try{
+					Driver s=(Driver)list.getSelectedValue();
+				c.removeDriver(s);
 				listModel.removeElement(list.getSelectedValue());
+				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+				PreparedStatement ps = con.prepareStatement("delete from driver where driver_no=?");
+	            ps.setInt(1, s.getNumber());
+	            ps.executeUpdate();
+	            
+				currentFrame.revalidate();
+				}
+				catch(SQLException ex)
+				{
+					System.out.println("arraylist not loading");
+				}
 			}
 		});
 		btnDelete.setBounds(327, 241, 117, 29);
