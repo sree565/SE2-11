@@ -62,7 +62,7 @@ public class HomeFrame extends JFrame {
 		System.out.println("in frame home frame");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 767, 383);
+		setBounds(100, 100, 769, 530);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -82,6 +82,17 @@ public class HomeFrame extends JFrame {
 		
 		JMenu mnNewMenu_1 = new JMenu("Manage Users");
 		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmUsersList = new JMenuItem("Users List");
+		mntmUsersList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UserListPanel dlp=new UserListPanel(currentFrame,company);
+				currentFrame.getContentPane().removeAll();
+				currentFrame.getContentPane().add(dlp);
+				currentFrame.getContentPane().revalidate();
+			}
+		});
+		mnNewMenu_1.add(mntmUsersList);
 		
 		JMenu mnDriverDetails = new JMenu("Driver Details");
 		menuBar.add(mnDriverDetails);
