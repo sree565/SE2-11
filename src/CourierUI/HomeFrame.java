@@ -3,6 +3,7 @@ package CourierUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.sql.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -32,6 +34,7 @@ public class HomeFrame extends JFrame {
 			public void run() {
 				try {
 					//pass the instance of Store to JFrame
+						
 					HomeFrame frame = new HomeFrame(company);
 					frame.setVisible(true);
 					  frame.setSize(600,600);
@@ -89,10 +92,16 @@ public class HomeFrame extends JFrame {
 		JMenuItem mntmDriversList = new JMenuItem("Driv List");
 		mntmDriversList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
 				DriverListPanel dlp=new DriverListPanel(currentFrame,company);
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(dlp);
 				currentFrame.getContentPane().revalidate();
+				}
+				catch(SQLException ex)
+				{
+					
+				}
 				//dlp.setVisible(true);
 			}
 		});

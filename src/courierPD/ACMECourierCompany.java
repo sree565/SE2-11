@@ -1,11 +1,20 @@
 package courierPD;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
+import java.sql.DriverManager;
+
+import java.sql.*;
+
 
 public class ACMECourierCompany {
 
-	private static TreeMap<String,Customer> customers;
-	private Collection<DeliveryTicket> DeliveryTicket;
-	private static TreeMap<String,Driver> drivers;
+	private static ArrayList<Customer> customers;
+	private ArrayList<DeliveryTicket> DeliveryTicket;
+	private static ArrayList<Driver> drivers=new ArrayList<Driver>();
 	private Collection<Map> Map;
 	/**
 	 * it is defines the name of the company
@@ -43,11 +52,11 @@ public class ACMECourierCompany {
 	
 	
 
-	public TreeMap<String, Customer> getCustomers() {
+	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
 
-	public void setCustomers(TreeMap<String, Customer> customers) {
+	public void setCustomers(ArrayList<Customer> customers) {
 		this.customers = customers;
 	}
 	
@@ -59,7 +68,7 @@ public class ACMECourierCompany {
 	public void addCustomer(Customer customer) {
 		if (customer != null) {
 			//System.out.println(""+getNumber());
-			getCustomers().put(customer.getNumber(), customer);
+			getCustomers().add(customer);
 		}
 	}
 
@@ -70,7 +79,7 @@ public class ACMECourierCompany {
 	 */
 	public void removeCustomer(Customer customer) {
 		if (customer != null) {
-			getCustomers().remove(customer.getNumber());
+			getCustomers().remove(customer);
 		}
 	}
 	/**
@@ -78,32 +87,76 @@ public class ACMECourierCompany {
 	 * @param customer
 	 */
 	
-	public void addDriver(Driver driver) {
+	public void addDriver(Driver driver) throws SQLException {
 		if (driver != null) {
-			getDrivers().put(driver.getNumber(), driver);
+			getDrivers().add(driver);
 		}
 	}
 	
-
+	
 
 	/**
 	 * remove driver from the company
 	 * 
 	 * @param cashier
 	 */
-	public void removeDriver(Driver driver) {
-		if (driver != null) {
-			getDrivers().remove(driver.getNumber());
+	public void removeDriver(Driver driver) throws SQLException {
+		
+		Connection con;
+		Statement stem;
+		drivers.clear();
+
+		try{
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+		//int RemID=driver.getNumber();
+		//String query =;
+		PreparedStatement ps = con.prepareStatement("delete  from driver where driver_no=?");
+		ps.setInt(1, driver.getNumber());
+		ResultSet rs = ps.executeQuery();
+		ps.executeUpdate();
+		//System.out.println("jshdf");
+//		stem=con.createStatement();
+//		ResultSet rs=stem.executeQuery(query);
+//		while(rs.next()){
+//			Driver d=new Driver();
+//			d.setNumber(rs.getInt("driver_no"));
+//			d.setName(rs.getString("d_name"));
+//			d.setEmail(rs.getString("d_email"));
+//			d.setPhone(rs.getString("d_phone"));
+//			drivers.add(d);
+//			}
+		}catch(Exception e){
+
 		}
 	}
 
-	public TreeMap<String, Driver> getDrivers() {
+	public ArrayList<Driver> getDrivers() throws SQLException{
+		Connection con;
+		Statement stem;
+		drivers.clear();
+
+		try{
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+		String query ="select driver_no,d_name,d_email,d_phone from driver";
+		stem=con.createStatement();
+		ResultSet rs=stem.executeQuery(query);
+		while(rs.next()){
+			Driver d=new Driver();
+			d.setNumber(rs.getInt("driver_no"));
+			d.setName(rs.getString("d_name"));
+			d.setEmail(rs.getString("d_email"));
+			d.setPhone(rs.getString("d_phone"));
+			drivers.add(d);
+			}
+		}catch(Exception e){
+
+		}
 		return drivers;
 	}
 	 
 	
 
-	public void setDrivers(TreeMap<String, Driver> drivers) {
+	public void setDrivers(ArrayList<Driver> drivers) {
 		this.drivers = drivers;
 	}
 
@@ -133,8 +186,8 @@ public class ACMECourierCompany {
 	}
 	public ACMECourierCompany()
 	{
-		drivers = new TreeMap <String ,Driver>();
-		customers = new TreeMap<String ,Customer>();
+//		drivers = new ArrayList<Driver>();
+//		customers = new ArrayList<Customer>();
 	}
 
 }

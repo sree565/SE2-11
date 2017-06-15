@@ -1,5 +1,7 @@
 package CourierUI;
 
+
+import java.sql.*;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
 
@@ -25,6 +27,7 @@ public class CustomerListPanel extends JPanel {
 	 */
 public JList list;
 private DefaultListModel dList;
+public Statement st;
 
 	JButton btnEdit;
 	public CustomerListPanel(JFrame currentFrame, ACMECourierCompany company){
@@ -34,9 +37,9 @@ private DefaultListModel dList;
 		JLabel lblCustomersList = new JLabel("Customers List");
 		dList= new DefaultListModel();
 
-		for(Entry<String,Customer> customerEntry : company.getCustomers().entrySet())
+		for(Customer c : company.getCustomers())
 		{
-			dList.addElement(customerEntry.getValue());
+			dList.addElement(c.getCustomer());
 			System.out.println("hello");
 		}
 
@@ -59,7 +62,7 @@ private DefaultListModel dList;
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			     Customer customer = new Customer();
+			     Customer customer = new Customer();       
 	            currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(new CustomerEditPanel(currentFrame,customer,company));
 			     currentFrame.getContentPane().revalidate();
