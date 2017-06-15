@@ -49,7 +49,7 @@ public class UserEditPanel extends JPanel {
 		textuserId.setColumns(10);
 		
 		textName = new JTextField();
-		textName.setBounds(136, 128, 116, 22);
+		textName.setBounds(214, 128, 116, 22);
 		add(textName);
 		textName.setColumns(10);
 		
