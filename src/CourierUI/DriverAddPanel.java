@@ -36,7 +36,7 @@ public class DriverAddPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblAddDriver = new JLabel("ADD DRIVER");
-		lblAddDriver.setBounds(198, 64, 118, 16);
+		lblAddDriver.setBounds(182, 44, 118, 16);
 		add(lblAddDriver);
 		
 		JLabel lblCourierId = new JLabel("COurier Id:-");
@@ -80,13 +80,13 @@ public class DriverAddPanel extends JPanel {
 		
 		txtPno = new JTextField();
 		txtPno.setText(driver.getPhone());
-		txtPno.setBounds(210, 211, 130, 26);
+		txtPno.setBounds(192, 208, 130, 26);
 		add(txtPno);
 		txtPno.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setText(driver.getEmail());
-		txtEmail.setBounds(210, 244, 130, 26);
+		txtEmail.setBounds(192, 249, 130, 26);
 		add(txtEmail);
 		txtEmail.setColumns(10);
 		

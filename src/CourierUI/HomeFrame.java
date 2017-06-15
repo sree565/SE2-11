@@ -65,7 +65,7 @@ public class HomeFrame extends JFrame {
 		System.out.println("in frame home frame");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 769, 530);
+		setBounds(100, 100, 810, 814);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

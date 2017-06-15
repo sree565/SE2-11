@@ -16,6 +16,9 @@ public class ACMECourierCompany {
 	private ArrayList<DeliveryTicket> DeliveryTicket;
 	private static ArrayList<Driver> drivers=new ArrayList<Driver>();
 	private Collection<Map> Map;
+	private static ArrayList<User> users;
+
+
 	/**
 	 * it is defines the name of the company
 	 */
@@ -82,8 +85,77 @@ public class ACMECourierCompany {
 			getCustomers().remove(customer);
 		}
 	}
+	
 	/**
-	 * Aadd Driver to Company
+	 * Add User to the Company
+	 */
+		
+	public void addUser(User user) throws SQLException {
+		if (user != null) {
+			getUsers().add(user);
+		}
+	}
+	
+
+	/**
+	 * remove user from the company
+	 * 
+	 * @param cashier
+	 */
+	public void removeUser(User user) throws SQLException {
+		
+		Connection con;
+		Statement stem;
+		users.clear();
+
+		try{
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+		
+		PreparedStatement ps = con.prepareStatement("delete  from user where u_id=?");
+		ps.setInt(1, user.getUserid());
+		ResultSet rs = ps.executeQuery();
+		ps.executeUpdate();
+
+		}catch(Exception e){
+
+		}
+	}
+	
+	public ArrayList<User> getUsers() throws SQLException{
+		Connection con;
+		Statement stem;
+		users.clear();
+
+		try{
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","241656");
+		String query ="select u_id,u_fname,u_pwd,u_role,u_email, u_phoneno from user";
+		stem=con.createStatement();
+		ResultSet rs=stem.executeQuery(query);
+		while(rs.next()){
+			User user = new User();
+			user.setUserid(rs.getInt("u_id"));
+			user.setName(rs.getString("u_fname"));
+			user.setPassword(rs.getString("u_pwd"));
+			user.setEmail(rs.getString("u_email"));
+			user.setUserphone(rs.getString("u_phoneno"));
+			users.add(user);
+		}
+		}catch(Exception e){
+
+		}
+		return users;
+	}
+	 
+	
+
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+	}
+
+	
+	
+	/**
+	 * Add Driver to Company
 	 * @param customer
 	 */
 	
@@ -114,17 +186,7 @@ public class ACMECourierCompany {
 		ps.setInt(1, driver.getNumber());
 		ResultSet rs = ps.executeQuery();
 		ps.executeUpdate();
-		//System.out.println("jshdf");
-//		stem=con.createStatement();
-//		ResultSet rs=stem.executeQuery(query);
-//		while(rs.next()){
-//			Driver d=new Driver();
-//			d.setNumber(rs.getInt("driver_no"));
-//			d.setName(rs.getString("d_name"));
-//			d.setEmail(rs.getString("d_email"));
-//			d.setPhone(rs.getString("d_phone"));
-//			drivers.add(d);
-//			}
+
 		}catch(Exception e){
 
 		}
