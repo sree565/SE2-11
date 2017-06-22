@@ -35,6 +35,16 @@ public class UserEditPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblUserEdit = new JLabel("User Edit");
+		lblUserEdit.setBounds(233, 25, 62, 17);
+		lblUserEdit.setFont(new Font("Tahoma", Font.BOLD, 14));
+		add(lblUserEdit);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(50, 83, 56, 16);
+		add(label);
+		setLayout(null);
+		
+		JLabel lblUserEdit = new JLabel("User Edit");
 		lblUserEdit.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblUserEdit.setBounds(216, 28, 129, 16);
 		add(lblUserEdit);
