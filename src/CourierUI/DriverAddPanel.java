@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class DriverAddPanel extends JPanel {
 	private JTextField txtCid;
@@ -36,27 +37,28 @@ public class DriverAddPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblAddDriver = new JLabel("ADD DRIVER");
+		lblAddDriver.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAddDriver.setBounds(182, 44, 118, 16);
 		add(lblAddDriver);
 		
-		JLabel lblCourierId = new JLabel("COurier Id:-");
-		lblCourierId.setBounds(72, 103, 76, 16);
+		JLabel lblCourierId = new JLabel("Courier Id:");
+		lblCourierId.setBounds(72, 98, 76, 16);
 		add(lblCourierId);
 		
-		JLabel lblFirstname = new JLabel("FirstName:-");
-		lblFirstname.setBounds(87, 141, 61, 16);
+		JLabel lblFirstname = new JLabel("FirstName:");
+		lblFirstname.setBounds(72, 136, 98, 16);
 		add(lblFirstname);
 		
-		JLabel lblLastname = new JLabel("LastName:-");
-		lblLastname.setBounds(87, 179, 61, 16);
+		JLabel lblLastname = new JLabel("LastName:");
+		lblLastname.setBounds(72, 174, 76, 16);
 		add(lblLastname);
 		
-		JLabel lblPhoneNumber = new JLabel("Phone Number:-");
-		lblPhoneNumber.setBounds(72, 221, 113, 16);
+		JLabel lblPhoneNumber = new JLabel("Phone Number:");
+		lblPhoneNumber.setBounds(72, 213, 113, 16);
 		add(lblPhoneNumber);
 		
-		JLabel lblEmailId = new JLabel("Email ID:-");
-		lblEmailId.setBounds(87, 254, 61, 16);
+		JLabel lblEmailId = new JLabel("Email ID:");
+		lblEmailId.setBounds(72, 254, 61, 16);
 		add(lblEmailId);
 		
 		txtCid = new JTextField();
@@ -90,7 +92,7 @@ public class DriverAddPanel extends JPanel {
 		add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JButton btnSave = new JButton("Hire");
+		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Connection con;

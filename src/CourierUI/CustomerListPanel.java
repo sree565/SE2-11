@@ -35,6 +35,7 @@ public Statement st;
 		setLayout(null);
 		
 		JLabel lblCustomersList = new JLabel("Customers List");
+		lblCustomersList.setFont(new Font("Tahoma", Font.BOLD, 14));
 		dList= new DefaultListModel();
 
 		for(Customer c : company.getCustomers())
@@ -43,7 +44,7 @@ public Statement st;
 			System.out.println("hello");
 		}
 
-		lblCustomersList.setBounds(184, 41, 164, 16);
+		lblCustomersList.setBounds(131, 49, 164, 16);
 		add(lblCustomersList);
 		
 		list = new JList(dList);

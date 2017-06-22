@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class CityMapEditPanel extends JPanel {
 	private JTextField textField;
@@ -20,8 +21,9 @@ public class CityMapEditPanel extends JPanel {
 	public CityMapEditPanel() {
 		setLayout(null);
 		
-		JLabel lblCityMap = new JLabel("City Map");
-		lblCityMap.setBounds(171, 36, 56, 16);
+		JLabel lblCityMap = new JLabel("City Map Edit");
+		lblCityMap.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCityMap.setBounds(171, 36, 124, 16);
 		add(lblCityMap);
 		
 		JLabel lblStreet = new JLabel("Street:");
@@ -29,7 +31,7 @@ public class CityMapEditPanel extends JPanel {
 		add(lblStreet);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(79, 83, 85, 22);
+		comboBox.setBounds(96, 83, 118, 22);
 		add(comboBox);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
@@ -42,11 +44,11 @@ public class CityMapEditPanel extends JPanel {
 		textField.setColumns(10);
 		
 		JLabel lblStartTime = new JLabel("Start Time:");
-		lblStartTime.setBounds(40, 187, 68, 16);
+		lblStartTime.setBounds(29, 187, 68, 16);
 		add(lblStartTime);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(111, 184, 116, 22);
+		textField_1.setBounds(98, 184, 116, 22);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -91,6 +93,14 @@ public class CityMapEditPanel extends JPanel {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(389, 388, 97, 25);
 		add(btnDelete);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(117, 249, 97, 25);
+		add(btnSave);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(246, 249, 97, 25);
+		add(btnCancel);
 
 	}
 }

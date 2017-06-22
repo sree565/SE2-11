@@ -7,8 +7,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class DriverAvailabilityPanel extends JPanel {
+	private JTable table;
 
 	/**
 	 * Create the panel.
@@ -17,12 +19,12 @@ public class DriverAvailabilityPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblDriverAvailability = new JLabel("Driver Availability");
-		lblDriverAvailability.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+		lblDriverAvailability.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblDriverAvailability.setBounds(161, 27, 167, 16);
 		add(lblDriverAvailability);
 		
 		JList list = new JList();
-		list.setBounds(68, 77, 296, 137);
+		list.setBounds(68, 77, 336, 160);
 		add(list);
 		
 		JButton btnSave = new JButton("Save");
@@ -30,7 +32,7 @@ public class DriverAvailabilityPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSave.setBounds(96, 248, 97, 25);
+		btnSave.setBounds(107, 268, 97, 25);
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -38,9 +40,12 @@ public class DriverAvailabilityPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel.setBounds(216, 248, 97, 25);
+		btnCancel.setBounds(266, 268, 97, 25);
 		add(btnCancel);
+		
+		table = new JTable();
+		table.setBounds(360, 131, 1, 1);
+		add(table);
 
 	}
-
 }
