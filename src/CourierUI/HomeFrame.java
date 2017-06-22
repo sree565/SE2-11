@@ -89,7 +89,13 @@ public class HomeFrame extends JFrame {
 		JMenuItem mntmUsersList = new JMenuItem("Users List");
 		mntmUsersList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserListPanel dlp=new UserListPanel(currentFrame,company);
+				UserListPanel dlp;
+				try {
+					dlp = new UserListPanel(currentFrame,company);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				currentFrame.getContentPane().removeAll();
 				currentFrame.getContentPane().add(dlp);
 				currentFrame.getContentPane().revalidate();
@@ -152,6 +158,10 @@ public class HomeFrame extends JFrame {
 		menuBar.add(mnReports);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Reports Selection");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		mnReports.add(mntmNewMenuItem);
 		
 		JMenu mnLogout = new JMenu("Logout");

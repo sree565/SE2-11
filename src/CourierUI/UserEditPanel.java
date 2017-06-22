@@ -12,7 +12,11 @@ import javax.swing.JFrame;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class UserEditPanel extends JPanel {
@@ -100,7 +104,23 @@ public class UserEditPanel extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
+			Connection conn;
+			Statement stmt;
+			
+			try{
+				int j=Integer.parseInt(textuserId.getText());
+				conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project_se1","root","root");
+				PreparedStatement ps=conn.prepareStatement("insert into user(user_id,name,phone no,userRole,password,email");
+					ps.setString(1,textuserId.getText() );
+					ps.setString(2,textName.getName() );
+									
+			}catch{
+				
+			}
+			
+			
+			 
 			
 			}
 		});
